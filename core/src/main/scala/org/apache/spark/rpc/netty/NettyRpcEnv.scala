@@ -55,10 +55,10 @@ private[netty] class NettyRpcEnv(
 
   private val dispatcher: Dispatcher = new Dispatcher(this, numUsableCores)
 
-  private val streamManager = new NettyStreamManager(this)
+  private val streamManager = new NettyStreamManager(this) /**core,rpc/netty**/
 
   private val transportContext = new TransportContext(transportConf,
-    new NettyRpcHandler(dispatcher, this, streamManager))
+    new NettyRpcHandler(dispatcher, this, streamManager))/**common,network-common,java**/
 
   private def createClientBootstraps(): java.util.List[TransportClientBootstrap] = {
     if (securityManager.isAuthenticationEnabled()) {
